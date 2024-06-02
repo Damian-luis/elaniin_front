@@ -20,7 +20,7 @@ export interface Book {
 }
 const TextMobileStepper = () => {
   const theme = useTheme();
-  //const { availableBooks, setAvailableBooks } = useContext(BooksContext)
+  const { availableBooks, setAvailableBooks } = useContext(BooksContext)
   const [activeStep, setActiveStep] = useState(0);
   const [books, setBooks] = useState([]);
   const maxSteps = books.length;
@@ -73,12 +73,12 @@ const TextMobileStepper = () => {
           bgcolor: 'background.default',
         }}
       >
-        <Link href={`/books/${(books[activeStep] as Book)?.id}`}>
-        <Typography sx={{fontSize:"20px",fontWeight:"600"}}>{(books[activeStep] as Book)?.title}</Typography>
+        <Link href={`/books/${(availableBooks[activeStep] as Book)?.id}`}>
+        <Typography sx={{fontSize:"20px",fontWeight:"600"}}>{(availableBooks[activeStep] as Book)?.title}</Typography>
         </Link>
       </Paper>
       <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}>
-      {(books[activeStep] as Book)?.summary?.slice(0, 200)}
+      {(availableBooks[activeStep] as Book)?.summary?.slice(0, 200)}
       </Box>
       <MobileStepper
         variant="text"
