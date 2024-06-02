@@ -13,24 +13,29 @@ import { getAllBooks } from '@/pages/api/books';
 import Link from 'next/link';
 import { BooksContext } from '@/context/BooksContext';
 //import { useRouter } from 'react-router-dom';
+export interface Book {
+  id: string;
+  title: string;
+  summary: string;
+}
 const TextMobileStepper = () => {
   const theme = useTheme();
-  const { availableBooks, setAvailableBooks } = useContext(BooksContext)
+  //const { availableBooks, setAvailableBooks } = useContext(BooksContext)
   const [activeStep, setActiveStep] = useState(0);
-  //const [books, setBooks] = useState([]);
-  const maxSteps = availableBooks.length;
+  const [books, setBooks] = useState([]);
+  const maxSteps = books.length;
   const [error, setError] = useState(null);
-  const truncatedSummary = availableBooks[activeStep]?.summary?.slice(0, 40);
+  const truncatedSummary = (books[activeStep] as Book)?.summary?.slice(0, 40)
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        //const booksData = await getAllBooks();
+        const booksData = await getAllBooks();
         
         console.log("aqui esta books")
         //console.log(booksData)
-        if (availableBooks) {
+        if (booksData) {
           
-          //setBooks(availableBooks);
+          setBooks(booksData);
         }
       } catch (error) {
        //setError(error.message || 'Error fetching books');
@@ -68,12 +73,12 @@ const TextMobileStepper = () => {
           bgcolor: 'background.default',
         }}
       >
-        <Link href={`/books/${availableBooks[activeStep]?.id}`}>
-        <Typography sx={{fontSize:"20px",fontWeight:"600"}}>{availableBooks[activeStep]?.title}</Typography>
+        <Link href={`/books/${(books[activeStep] as Book)?.id}`}>
+        <Typography sx={{fontSize:"20px",fontWeight:"600"}}>{(books[activeStep] as Book)?.title}</Typography>
         </Link>
       </Paper>
       <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}>
-        {availableBooks[activeStep]?.summary?.slice(0, 200)}
+      {(books[activeStep] as Book)?.summary?.slice(0, 200)}
       </Box>
       <MobileStepper
         variant="text"

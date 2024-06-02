@@ -1,7 +1,7 @@
 import apiClient from "@/utils/axios";
 
 
-export async function queryBook(bookId: String, question: String): Promise<any> {
+export async function queryBook(bookId: string, question: string): Promise<any> {
   try {
     const response = await apiClient.post(`/query/${bookId}`, {
      question
@@ -17,7 +17,7 @@ export async function queryBook(bookId: String, question: String): Promise<any> 
 
 
 
-export async function uploadBook(file:any,title:String) {
+export async function uploadBook(file:any,title:string) {
   try {
     const formData = new FormData();
     formData.append('file', file);
@@ -45,7 +45,7 @@ export async function getAllBooks() {
   }
 }
 
-export async function getBook(id:String) {
+export async function getBook(id:string) {
   try {
 
     const response = await apiClient.get(`getBook/${id}`);
@@ -59,7 +59,7 @@ export async function getBook(id:String) {
 
 
 
-export async function deleteBook(id:String) {
+export async function deleteBook(id:string) {
   try {
     const response = await apiClient.delete(`delete/${id}`);
     return response.status === 200; 

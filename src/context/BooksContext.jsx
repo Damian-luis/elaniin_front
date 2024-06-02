@@ -8,7 +8,7 @@ const BooksContext = createContext({
 });
 
 const BooksProvider = ({ children }) => {
-  const [availableBooks, setAvailableBooks] = useState([]);
+  
 
   const fetchAvailableBooks = async () => {
     try {
