@@ -1,8 +1,12 @@
 # Usa una imagen base de Node.js
-FROM node:18-alpine
-
+FROM node:18-bullseye-slim
+# Desactiva la verificación de TLS
+RUN npm config set strict-ssl false
 # Establece el directorio de trabajo
 WORKDIR /app
+
+# Configura npm para usar HTTP en lugar de HTTPS
+# Actualiza OpenSSL
 
 # Copia el package.json y el package-lock.json
 COPY package*.json ./
